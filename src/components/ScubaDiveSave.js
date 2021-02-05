@@ -1,10 +1,10 @@
 import  React, { Component } from  'react';
+//import { useHistory as history } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import scubaDiveService from "../services/ScubaDiveService";
 
 
-
-export default class ScubaDiveSave extends Component{
-    
+class ScubaDiveSave extends Component{
     state = {
         scubaDiveService: new scubaDiveService(),
         scubaList: [],
@@ -19,106 +19,104 @@ export default class ScubaDiveSave extends Component{
         description: "",
     }
 
-    getScubaData = () => {
-        this.state.scubaDiveService.getScubaDiveList().then((res) =>{
-            this.setState({scubaList: res.data})
-            console.log(res.data)
-        })
-    }
-
     onSubmit = (e) =>{
-        
         const newSubaData = {
-            max_depth: this.refs.max_depth.value,
-            time_bellow_surface: this.refs.time_bellow_surface.value,
-            starting_ox_level: this.refs.starting_ox_level.value,
-            ending_ox_level: this.refs.ending_ox_level.value,
-            location: this.refs.location.value,
-            outside_temp: this.refs.outside_temp.value,
-            water_temp: this.refs.water_temp.value,
-            description: this.refs.description.value
+            max_depth: this.state.max_depth,
+            time_bellow_surface: this.state.time_bellow_surface,
+            starting_ox_level: this.state.starting_ox_level,
+            ending_ox_level: this.state.ending_ox_level,
+            location: this.state.location,
+            outside_temp: this.state.outside_temp,
+            water_temp: this.state.water_temp,
+            description: this.state.description
         };
 
         this.state.scubaDiveService.addScubaData(newSubaData).then((res)=>{
-            this.setState({actionSuccess:true})
+            this.setState({actionSuccess:true},
+                console.log(res.data))
+        }).catch(()=>{
+            alert('There was an error! Please re-check your form.');
         })
        e.preventDefault();
+       this.setState({
+            max_depth:"",
+            time_bellow_surface:"",
+            starting_ox_level:"",
+            ending_ox_level:"",
+            location:"",
+            outside_temp:"",
+            water_temp:"",
+            description:""
+      });
+      this.props.history.push('/')
     }
-    
-    componentDidMount(){
-        this.getScubaData();
+    onChange  = e =>{
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
-    
-    render(){
 
+    render(){
         return(
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                     <label >Max Depth</label>
                     <input className="form-control" 
                             type="text"
-                            ref="max_depth"
-                            //value={this.state.max_depth}
-                            //onChange={this.onChange}
+                            name="max_depth"
+                            value={this.state.max_depth}
+                            onChange={this.onChange}
                             />
 
                     <label >Time Bellow Surface</label>
                     <input className="form-control" 
                             type="time"
-                            ref="time_bellow_surface"
-                            //value={this.state.time_bellow_surface}
-                            //onChange={this.onChange}
+                            name="time_bellow_surface"
+                            value={this.state.time_bellow_surface}
+                            onChange={this.onChange}
                             />
 
                     <label >Starting Oxigen Level</label>
                     <input className="form-control" 
                             type="text"
-                            ref="starting_ox_level"
-                            //onChange={this.onChange}
-                            //value={this.state.starting_ox_level}
+                            name="starting_ox_level"
+                            onChange={this.onChange}
+                            value={this.state.starting_ox_level}
                             />
-
                     <label >Ending Oxigen Level</label>
-                    <input className="form-control" 
-                            
+                    <input className="form-control"      
                             type="text"
-                            ref="ending_ox_level"
-                            //onChange={this.onChange}
-                            //value={this.state.ending_ox_level}
+                            name="ending_ox_level"
+                            onChange={this.onChange}
+                            value={this.state.ending_ox_level}
                             />
-
                     <label >Location</label>
                     <input className="form-control" 
-                            
                             type="text"
-                            ref="location"
-                            //onChange={this.onChange}
-                            //value={this.state.location}
+                            name="location"
+                            onChange={this.onChange}
+                            value={this.state.location}
                             />
-
                     <label >Outside Temp</label>
                     <input className="form-control" 
-                            
                             type="text"
-                            ref="outside_temp"
-                            //onChange={this.onChange}
-                            //value={this.state.outside_temp}
+                            name="outside_temp"
+                            onChange={this.onChange}
+                            value={this.state.outside_temp}
                             />
-
                     <label >Water Temp</label>
                     <input className="form-control" 
                             type="text"
-                            ref="water_temp"
-                            //onChange={this.onChange}
-                            //value={this.state.water_temp}
+                            name="water_temp"
+                            onChange={this.onChange}
+                            value={this.state.water_temp}
                             />
-
                     <label>Description</label>
                     <textarea className="form-control" 
                                 rows="3"
-                                ref="description"
-                                //onChange={this.onChange}
-                                //value={this.state.description}
+                                name="description"
+                                onChange={this.onChange}
+                                value={this.state.description}
                                 ></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Save</button>
@@ -127,3 +125,4 @@ export default class ScubaDiveSave extends Component{
         )
     }
 }
+export default withRouter(ScubaDiveSave);

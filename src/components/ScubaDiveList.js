@@ -1,6 +1,7 @@
 import  React, { Component } from  'react';
 import scubaDiveService from "../services/ScubaDiveService";
 import { DataGrid } from '@material-ui/data-grid';
+import Moment from 'moment'
 
 export default class ScubaDiveList extends Component{
     state = {
@@ -36,14 +37,14 @@ export default class ScubaDiveList extends Component{
     render(){
         return(
             <div>
-                    <div >
-                        <div style={{ height: 400, 
-                            width: '100%'}}>
-                            <DataGrid 
-                            rows={this.state.scubaList} 
-                            columns={this.columns} 
-                            pageSize={5}/>
-                    </div>
+                <div>
+                    <div style={{ height: 400, 
+                        width: '100%'}}>
+                        <DataGrid 
+                        rows={this.state.scubaList} 
+                        columns={this.columns} 
+                        pageSize={10}/>
+                </div>
                 </div>
             </div>
         )
