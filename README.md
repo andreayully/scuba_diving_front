@@ -1,6 +1,6 @@
 # scua_diving_front
 
-Backend for Scuba Diving journal App
+Frontend for Scuba Diving journal App
 Get and stores the track of scuba dives
 
 * maximum depth
@@ -13,8 +13,6 @@ Get and stores the track of scuba dives
 * a description of what you saw
 
 ## To run locally
-
-To run this project, install it locally using npm:
 
 ~~~
 $ git clone https://github.com/andreayully/scuba_diving_front.git
