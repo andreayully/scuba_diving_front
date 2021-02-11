@@ -1,6 +1,6 @@
 # scua_diving_front
 
-Backend for Scuba Diving journal App
+Frontend for Scuba Diving journal App
 Get and stores the track of scuba dives
 
 * maximum depth
