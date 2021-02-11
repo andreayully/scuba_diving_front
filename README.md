@@ -14,8 +14,6 @@ Get and stores the track of scuba dives
 
 ## To run locally
 
-To run this project, install it locally using npm:
-
 ~~~
 $ git clone https://github.com/andreayully/scuba_diving_front.git
 
